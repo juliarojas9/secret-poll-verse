@@ -54,7 +54,22 @@ const CreatePoll = () => {
       const durationInSeconds = parseInt(duration) * 3600; // Convert hours to seconds
       const validOptions = options.filter(opt => opt.trim());
       
-      const result = await createPoll.writeAsync({
+      const result = await createPoll.writeContractAsync({
+        address: import.meta.env.VITE_POLL_CONTRACT_ADDRESS || '0x0000000000000000000000000000000000000000',
+        abi: [
+          {
+            "inputs": [
+              {"internalType": "string", "name": "_question", "type": "string"},
+              {"internalType": "string[]", "name": "_options", "type": "string[]"},
+              {"internalType": "uint256", "name": "_duration", "type": "uint256"}
+            ],
+            "name": "createPoll",
+            "outputs": [{"internalType": "uint256", "name": "", "type": "uint256"}],
+            "stateMutability": "nonpayable",
+            "type": "function"
+          }
+        ],
+        functionName: 'createPoll',
         args: [question.trim(), validOptions, BigInt(durationInSeconds)]
       });
       

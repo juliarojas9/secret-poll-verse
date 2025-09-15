@@ -1,4 +1,4 @@
-import { useContract, useContractWrite, useContractRead } from 'wagmi';
+import { useWriteContract, useReadContract } from 'wagmi';
 import { useAccount } from 'wagmi';
 
 // Contract ABI - This would be generated from the compiled contract
@@ -65,31 +65,41 @@ const POLL_CONTRACT_ADDRESS = import.meta.env.VITE_POLL_CONTRACT_ADDRESS || '0x0
 export const usePollContract = () => {
   const { address } = useAccount();
   
-  const contract = useContract({
-    address: POLL_CONTRACT_ADDRESS,
-    abi: POLL_CONTRACT_ABI,
+  const createPoll = useWriteContract({
+    mutation: {
+      onSuccess: () => {
+        console.log('Poll created successfully');
+      },
+      onError: (error) => {
+        console.error('Error creating poll:', error);
+      },
+    },
   });
 
-  const createPoll = useContractWrite({
-    address: POLL_CONTRACT_ADDRESS,
-    abi: POLL_CONTRACT_ABI,
-    functionName: 'createPoll',
+  const castVote = useWriteContract({
+    mutation: {
+      onSuccess: () => {
+        console.log('Vote cast successfully');
+      },
+      onError: (error) => {
+        console.error('Error casting vote:', error);
+      },
+    },
   });
 
-  const castVote = useContractWrite({
-    address: POLL_CONTRACT_ADDRESS,
-    abi: POLL_CONTRACT_ABI,
-    functionName: 'castVote',
-  });
-
-  const closePoll = useContractWrite({
-    address: POLL_CONTRACT_ADDRESS,
-    abi: POLL_CONTRACT_ABI,
-    functionName: 'closePoll',
+  const closePoll = useWriteContract({
+    mutation: {
+      onSuccess: () => {
+        console.log('Poll closed successfully');
+      },
+      onError: (error) => {
+        console.error('Error closing poll:', error);
+      },
+    },
   });
 
   const getPollInfo = (pollId: number) => {
-    return useContractRead({
+    return useReadContract({
       address: POLL_CONTRACT_ADDRESS,
       abi: POLL_CONTRACT_ABI,
       functionName: 'getPollInfo',
@@ -98,17 +108,18 @@ export const usePollContract = () => {
   };
 
   const hasUserVoted = (pollId: number) => {
-    return useContractRead({
+    return useReadContract({
       address: POLL_CONTRACT_ADDRESS,
       abi: POLL_CONTRACT_ABI,
       functionName: 'hasUserVoted',
       args: address ? [address, BigInt(pollId)] : undefined,
-      enabled: !!address,
+      query: {
+        enabled: !!address,
+      },
     });
   };
 
   return {
-    contract,
     createPoll,
     castVote,
     closePoll,

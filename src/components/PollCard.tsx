@@ -59,7 +59,22 @@ const PollCard = ({ poll, hasVoted = false, selectedOption }: PollCardProps) => 
       const encryptedOptionIndex = new Uint8Array(32); // Placeholder for encrypted data
       const inputProof = new Uint8Array(32); // Placeholder for proof
       
-      const result = await castVote.writeAsync({
+      const result = await castVote.writeContractAsync({
+        address: import.meta.env.VITE_POLL_CONTRACT_ADDRESS || '0x0000000000000000000000000000000000000000',
+        abi: [
+          {
+            "inputs": [
+              {"internalType": "uint256", "name": "_pollId", "type": "uint256"},
+              {"internalType": "bytes", "name": "_optionIndex", "type": "bytes"},
+              {"internalType": "bytes", "name": "_inputProof", "type": "bytes"}
+            ],
+            "name": "castVote",
+            "outputs": [{"internalType": "uint256", "name": "", "type": "uint256"}],
+            "stateMutability": "nonpayable",
+            "type": "function"
+          }
+        ],
+        functionName: 'castVote',
         args: [BigInt(poll.id), encryptedOptionIndex, inputProof]
       });
       
