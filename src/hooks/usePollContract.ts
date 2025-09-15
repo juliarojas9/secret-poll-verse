@@ -60,7 +60,7 @@ const POLL_CONTRACT_ABI = [
   }
 ] as const;
 
-const POLL_CONTRACT_ADDRESS = import.meta.env.VITE_POLL_CONTRACT_ADDRESS || '0x0000000000000000000000000000000000000000';
+const POLL_CONTRACT_ADDRESS = import.meta.env.VITE_POLL_CONTRACT_ADDRESS || 'your_contract_address_here';
 
 export const usePollContract = () => {
   const { address } = useAccount();

@@ -36,12 +36,12 @@ In the "Environment Variables" section, add the following variables:
 
 ```
 NEXT_PUBLIC_CHAIN_ID=11155111
-NEXT_PUBLIC_RPC_URL=https://sepolia.infura.io/v3/b18fb7e6ca7045ac83c41157ab93f990
-NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID=2ec9743d0d0cd7fb94dee1a7e6d33475
-NEXT_PUBLIC_INFURA_API_KEY=b18fb7e6ca7045ac83c41157ab93f990
-NEXT_PUBLIC_RPC_URL=https://1rpc.io/sepolia
-NEXT_PUBLIC_POLL_CONTRACT_ADDRESS=
-NEXT_PUBLIC_FHE_CONTRACT_ADDRESS=
+NEXT_PUBLIC_RPC_URL=your_rpc_url_here
+NEXT_PUBLIC_WALLET_CONNECT_PROJECT_ID=your_wallet_connect_project_id_here
+NEXT_PUBLIC_INFURA_API_KEY=your_infura_api_key_here
+NEXT_PUBLIC_RPC_URL=your_alternative_rpc_url_here
+NEXT_PUBLIC_POLL_CONTRACT_ADDRESS=your_poll_contract_address_here
+NEXT_PUBLIC_FHE_CONTRACT_ADDRESS=your_fhe_contract_address_here
 ```
 
 **Important**: Replace the contract addresses with actual deployed contract addresses when available.

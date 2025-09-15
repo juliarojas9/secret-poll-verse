@@ -235,8 +235,8 @@ The project successfully integrates cutting-edge cryptographic techniques with p
 - **Status**: Active Development
 
 ### Contact
-- **Email**: cook05@orbitron.cloud
 - **GitHub**: @juliarojas9
+- **Issues**: [GitHub Issues](https://github.com/juliarojas9/secret-poll-verse/issues)
 
 ---
 

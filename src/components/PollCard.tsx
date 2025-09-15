@@ -60,7 +60,7 @@ const PollCard = ({ poll, hasVoted = false, selectedOption }: PollCardProps) => 
       const inputProof = new Uint8Array(32); // Placeholder for proof
       
       const result = await castVote.writeContractAsync({
-        address: import.meta.env.VITE_POLL_CONTRACT_ADDRESS || '0x0000000000000000000000000000000000000000',
+        address: import.meta.env.VITE_POLL_CONTRACT_ADDRESS || 'your_contract_address_here',
         abi: [
           {
             "inputs": [
